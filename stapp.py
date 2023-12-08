@@ -142,21 +142,21 @@ def moindres_couts(offre,demande,couts,couts_M):
 Pb = st.selectbox("Quel type de problème", ["Maximisation", "Minimisation"])
 
 #ajout de ligne ou colonne fictives
-if uploaded_file is not None:
-    sum_offre = offre.sum()
-    sum_demande = demande.sum()
-    if sum_offre > sum_demande:
-        colonne_fictive = np.zeros(len(demande))
-        colonne_fictive = colonne_fictive.reshape(-1, 1)
-        demande  = np.append(demande,sum_offre-sum_demande)
-        couts = np.hstack([couts, colonne_fictive])
-        st.write("Demande",demande.reshape(1,len(demande)))
-    elif sum_demande > sum_offre:
-        ligne_fictive = np.zeros(len(offre))
-        ligne_fictive = ligne_fictive.reshape(1,len(demande))
-        offre = np.append(offre,sum_demande-sum_offre)
-        couts = np.vstack([couts, ligne_fictive])
-        st.write("Offre",offre.reshape(1,len(offre)))
+
+sum_offre = offre.sum()
+sum_demande = demande.sum()
+if sum_offre > sum_demande:
+    colonne_fictive = np.zeros(len(demande))
+    colonne_fictive = colonne_fictive.reshape(-1, 1)
+    demande  = np.append(demande,sum_offre-sum_demande)
+    couts = np.hstack([couts, colonne_fictive])
+    st.write("Demande",demande.reshape(1,len(demande)))
+elif sum_demande > sum_offre:
+    ligne_fictive = np.zeros(len(offre))
+    ligne_fictive = ligne_fictive.reshape(1,len(demande))
+    offre = np.append(offre,sum_demande-sum_offre)
+    couts = np.vstack([couts, ligne_fictive])
+    st.write("Offre",offre.reshape(1,len(offre)))
 st.write("matrice des couts")
 if Pb == "Maximisation":
     couts_M = np.amax(couts) - couts
