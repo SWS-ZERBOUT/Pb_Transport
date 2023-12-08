@@ -142,7 +142,7 @@ def moindres_couts(offre,demande,couts,couts_M):
 Pb = st.selectbox("Quel type de problème", ["Maximisation", "Minimisation"])
 
 #ajout de ligne ou colonne fictives
-if len(offre) != 0 and len(demande)!=0 :
+if uploaded_file is not None or len(couts)!=0 :
     sum_offre = offre.sum()
     sum_demande = demande.sum()
     if sum_offre > sum_demande:
